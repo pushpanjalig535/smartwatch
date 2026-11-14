@@ -1,0 +1,24 @@
+
+14-11-2026 23:18:23 - SIMULATED SOS ALERT
+Location (simulated): LAT  12.97160 N, LON  77.59460 E
+To: Contact One (+910000000001)
+Message: SOS! Emergency assistance needed. Simulated location: 12.97160, 77.59460
+Transmitted: NO - simulation only
+To: Contact Two (+910000000002)
+Message: SOS! Emergency assistance needed. Simulated location: 12.97160, 77.59460
+Transmitted: NO - simulation only
+To: Campus Security (+910000000003)
+Message: SOS! Emergency assistance needed. Simulated location: 12.97160, 77.59460
+Transmitted: NO - simulation only
+
+14-11-2026 23:26:44 - SIMULATED SOS ALERT
+Location (simulated): LAT  12.97160 N, LON  77.59460 E
+To: Contact One (+910000000001)
+Message: SOS! Emergency assistance needed. Simulated location: 12.97160, 77.59460
+Transmitted: NO - simulation only
+To: Contact Two (+910000000002)
+Message: SOS! Emergency assistance needed. Simulated location: 12.97160, 77.59460
+Transmitted: NO - simulation only
+To: Campus Security (+910000000003)
+Message: SOS! Emergency assistance needed. Simulated location: 12.97160, 77.59460
+Transmitted: NO - simulation only

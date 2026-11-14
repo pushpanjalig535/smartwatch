@@ -1,0 +1,6 @@
+# Emergency contacts - one per line:   Name, phone number, relation
+# The relation is optional. Use ONLY dummy numbers.
+# This simulation never calls or texts anyone.
+Contact One, +910000000001, Parent
+Contact Two, +910000000002, Friend
+Campus Security, +910000000003, Security

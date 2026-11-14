@@ -1,0 +1,30 @@
+14-11-2026 23:18:10 - Application started - 3 contacts loaded
+14-11-2026 23:18:16 - SOS button pressed - holding...
+14-11-2026 23:18:17 - SOS triggered (button held 1 s)
+14-11-2026 23:18:18 - Countdown started - 5 s to cancel
+14-11-2026 23:18:23 - SOS ACTIVATED - emergency mode on
+14-11-2026 23:18:23 - Simulated notifications prepared for 3 contacts (not sent)
+14-11-2026 23:18:30 - Simulated GPS updated: 12.97101, 77.59288
+14-11-2026 23:18:47 - System reset - back to normal
+14-11-2026 23:18:48 - SOS button pressed - holding...
+14-11-2026 23:18:48 - Released before 1 s - SOS not triggered
+14-11-2026 23:18:50 - SOS button pressed - holding...
+14-11-2026 23:18:51 - SOS triggered (button held 1 s)
+14-11-2026 23:18:51 - Countdown started - 5 s to cancel
+14-11-2026 23:18:53 - SOS cancelled by user - no alert prepared
+14-11-2026 23:18:55 - Returned to normal watch screen
+14-11-2026 23:26:17 - Application closed
+14-11-2026 23:26:35 - Application started - 3 contacts loaded
+14-11-2026 23:26:38 - SOS button pressed - holding...
+14-11-2026 23:26:39 - SOS triggered (button held 1 s)
+14-11-2026 23:26:39 - Countdown started - 5 s to cancel
+14-11-2026 23:26:44 - SOS ACTIVATED - emergency mode on
+14-11-2026 23:26:44 - Simulated messages prepared for 3 contacts
+14-11-2026 23:26:46 - Simulated GPS updated: 12.97178, 77.59653
+14-11-2026 23:26:56 - System reset - back to normal
+14-11-2026 23:26:58 - SOS button pressed - holding...
+14-11-2026 23:26:59 - SOS triggered (button held 1 s)
+14-11-2026 23:26:59 - Countdown started - 5 s to cancel
+14-11-2026 23:27:00 - SOS cancelled by user - no alert prepared
+14-11-2026 23:27:02 - Returned to normal watch screen
+14-11-2026 23:27:06 - Application closed
