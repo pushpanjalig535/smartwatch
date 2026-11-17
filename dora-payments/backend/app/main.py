@@ -70,10 +70,24 @@ app.include_router(wallet_router, prefix=api_v1_prefix)
 app.include_router(auth_router, prefix=api_v1_prefix)
 
 # Serve Frontend static files if present
-frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend"))
+_candidates = [
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend")),
+    os.path.abspath(os.path.join(os.getcwd(), "dora-payments", "frontend")),
+    os.path.abspath(os.path.join(os.getcwd(), "frontend")),
+]
+frontend_dir = next((p for p in _candidates if os.path.exists(p)), _candidates[0])
+
 if os.path.exists(frontend_dir):
     app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
 
-    @app.get("/")
-    def serve_frontend():
-        return FileResponse(os.path.join(frontend_dir, "index.html"))
+@app.get("/")
+def serve_frontend():
+    index_file = os.path.join(frontend_dir, "index.html")
+    if os.path.exists(index_file):
+        return FileResponse(index_file)
+    return success_envelope({
+        "status": "online",
+        "service": settings.DORA_MODULE_NAME,
+        "docs": "/docs",
+        "api": "/api/v1"
+    })

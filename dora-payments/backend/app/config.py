@@ -1,5 +1,14 @@
+import os
+import tempfile
 from pydantic_settings import BaseSettings
 from typing import Literal
+
+def _default_db_url():
+    if os.environ.get("VERCEL"):
+        # On Vercel serverless Linux, writable directory is tempfile.gettempdir()
+        tmp = tempfile.gettempdir().replace("\\", "/")
+        return f"sqlite:///{tmp}/dora_payments.db"
+    return "sqlite:///./dora_payments.db"
 
 class Settings(BaseSettings):
     DORA_ENV: str = "development"
@@ -9,7 +18,7 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
-    DATABASE_URL: str = "sqlite:///./dora_payments.db"
+    DATABASE_URL: str = _default_db_url()
 
     # Money limits in paise (never float)
     MAX_PER_TRANSACTION_LIMIT_PAISE: int = 500000  # 5,000 INR
