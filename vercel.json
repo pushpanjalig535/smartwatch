@@ -1,31 +1,34 @@
 {
-  "version": 2,
-  "builds": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
     {
-      "src": "api/index.py",
-      "use": "@vercel/python"
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
     },
     {
-      "src": "dora-payments/frontend/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/dora-payments/frontend/$1"
+      "source": "/static/(.*)",
+      "destination": "/dora-payments/frontend/$1"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "source": "/health",
+      "destination": "/api/index.py"
     },
     {
-      "src": "/(health|manifest|docs|openapi.json)",
-      "dest": "/api/index.py"
+      "source": "/manifest",
+      "destination": "/api/index.py"
     },
     {
-      "src": "/",
-      "dest": "/dora-payments/frontend/index.html"
+      "source": "/docs",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/openapi.json",
+      "destination": "/api/index.py"
+    },
+    {
+      "source": "/",
+      "destination": "/dora-payments/frontend/index.html"
     }
   ]
 }
