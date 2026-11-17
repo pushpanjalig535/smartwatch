@@ -31,7 +31,10 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup():
-    init_db()
+    try:
+        init_db()
+    except Exception as e:
+        print(f"[DB Warning] SQLite init failed (ignoring for serverless read path): {e}")
 
 # DORA Module Integration Endpoints
 @app.get("/health", summary="Health check endpoint for DORA orchestrator")
@@ -75,16 +78,17 @@ _candidates = [
     os.path.abspath(os.path.join(os.getcwd(), "dora-payments", "frontend")),
     os.path.abspath(os.path.join(os.getcwd(), "frontend")),
 ]
-frontend_dir = next((p for p in _candidates if os.path.exists(p)), _candidates[0])
+frontend_dir = next((p for p in _candidates if os.path.exists(p)), None)
 
-if os.path.exists(frontend_dir):
+if frontend_dir and os.path.exists(frontend_dir):
     app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
 
 @app.get("/")
 def serve_frontend():
-    index_file = os.path.join(frontend_dir, "index.html")
-    if os.path.exists(index_file):
-        return FileResponse(index_file)
+    if frontend_dir:
+        index_file = os.path.join(frontend_dir, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
     return success_envelope({
         "status": "online",
         "service": settings.DORA_MODULE_NAME,
