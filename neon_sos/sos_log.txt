@@ -28,3 +28,12 @@
 14-11-2026 23:27:00 - SOS cancelled by user - no alert prepared
 14-11-2026 23:27:02 - Returned to normal watch screen
 14-11-2026 23:27:06 - Application closed
+17-11-2026 21:17:56 - SOS button pressed - countdown started (5s to cancel)
+17-11-2026 21:17:56 - SOS ACTIVATED - simulated alerts dispatched to 3 contacts
+17-11-2026 21:17:56 - SOS cancelled by user
+17-11-2026 21:25:44 - SOS button pressed - countdown started (5s to cancel)
+17-11-2026 21:25:44 - SOS ACTIVATED - simulated alerts dispatched to 3 contacts
+17-11-2026 21:25:44 - SOS cancelled by user
+17-11-2026 21:31:43 - SOS button pressed - countdown started (5s to cancel)
+17-11-2026 21:31:47 - SOS ACTIVATED - simulated alerts dispatched to 3 contacts
+17-11-2026 21:31:51 - SOS cancelled by user

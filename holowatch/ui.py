@@ -92,19 +92,21 @@ class Dashboard:
         self.log = []
 
         # ------------------------------------------------ watch screen selector (bottom)
-        self.bottom = DirectFrame(parent=BC, frameSize=(-0.62, 0.62, -0.05, 0.05), pos=(0, 0, 0.14),
+        self.bottom = DirectFrame(parent=BC, frameSize=(-0.82, 0.82, -0.05, 0.05), pos=(0, 0, 0.14),
                                   frameColor=(0.0, 0.05, 0.1, 0.55), relief=DGG.FLAT)
         self.page_btns = []
-        for i, name in enumerate(("HOME", "HEALTH", "FITNESS", "ALERTS", "SOS")):
-            btn = DirectButton(parent=self.bottom, text=name, text_scale=0.028, text_fg=RED if name == "SOS" else CY,
-                               text_pos=(0, -0.01), frameSize=(-0.11, 0.11, -0.035, 0.035),
-                               pos=(-0.48 + i * 0.24, 0, 0), relief=DGG.FLAT, frameColor=BTN_OFF, pressEffect=0,
+        screen_names = ("HOME", "HEALTH", "FITNESS", "PAY", "BIO", "ALERTS", "SOS")
+        for i, name in enumerate(screen_names):
+            col = RED if name == "SOS" else (AMB if name == "PAY" else CY)
+            btn = DirectButton(parent=self.bottom, text=name, text_scale=0.026, text_fg=col,
+                               text_pos=(0, -0.009), frameSize=(-0.10, 0.10, -0.035, 0.035),
+                               pos=(-0.69 + i * 0.23, 0, 0), relief=DGG.FLAT, frameColor=BTN_OFF, pressEffect=0,
                                command=app.screen_page, extraArgs=[i])
             self.page_btns.append(btn)
         self.hint = OnscreenText(
-            text="DRAG: ROTATE   WHEEL: ZOOM   CLICK WATCH SCREEN: INTERACT   SPACE: PAUSE   1-5: SCREENS   "
+            text="DRAG: ROTATE   WHEEL: ZOOM   CLICK WATCH SCREEN: INTERACT   SPACE: PAUSE   1-7: SCREENS   "
                  "X: X-RAY   E: DISASSEMBLE   I: INSPECT   R: RESET   ENTER: SKIP INTRO",
-            parent=BC, pos=(0, 0.04), scale=0.024, fg=(0.3, 0.6, 0.7, 1))
+            parent=BC, pos=(0, 0.04), scale=0.022, fg=(0.3, 0.6, 0.7, 1))
         self.msg = OnscreenText(text="", parent=app.aspect2d, pos=(0, -0.62), scale=0.058, fg=CY,
                                 shadow=(0, 0, 0, 0.9), mayChange=True)
         self.msg.setTransparency(TransparencyAttrib.MAlpha)

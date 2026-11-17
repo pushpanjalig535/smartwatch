@@ -141,6 +141,9 @@ class HoloApp(ShowBase):
 
     def _upload_screen(self, power):
         img = self.screen.render(self.tel, power)
+        # Downsample from 2x supersampled resolution back to texture resolution
+        if img.size != (SCR_W, SCR_H):
+            img = img.resize((SCR_W, SCR_H), resample=1)   # 1 = PIL LANCZOS
         arr = np.asarray(img)[::-1]
         self.screen_tex.setRamImageAs(np.ascontiguousarray(arr).tobytes(), "RGBA")
 
@@ -159,7 +162,7 @@ class HoloApp(ShowBase):
                 "escape": sys.exit}
         for k, fn in keys.items():
             a(k, self._act, [fn])
-        for i in range(5):
+        for i in range(7):
             a(str(i + 1), self._act, [self.screen_page, i])
 
     def _act(self, fn, *args):

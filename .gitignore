@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Panda3D
+*.bam
+*.egg-idx
+
+# DB (demo data, not for repo)
+*.db
+
+# Env files (keep example, not actual)
+.env
+
+# Build / dist
+dist/
+build/
+*.egg-info/

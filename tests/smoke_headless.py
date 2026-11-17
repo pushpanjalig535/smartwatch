@@ -98,7 +98,7 @@ def main():
     assert app.proj == 0.0 and app.lv["form"] == 0.0
     app.toggle_projection(); run(3.0)
     assert app.proj == 1.0
-    for i in range(5):
+    for i in range(7):
         app.screen_page(i); run(0.2)
     app.set_brightness(1.4); app.set_speed(90); app.set_size(1.3); run(0.5)
     app.reset_view()

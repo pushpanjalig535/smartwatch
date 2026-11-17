@@ -12,7 +12,8 @@ from holowatch.watch_model import build_watch, screen_half_size, outline_ring, l
 from holowatch.particles import ParticleField, EdgeRunners, DataStreams, label_links
 from holowatch.telemetry import Telemetry
 from holowatch import timeline
-from holowatch.screen import WatchScreen, PAGES, W, H
+from holowatch.screen import WatchScreen, PAGES, W, H, S
+from holowatch.services import EmergencyService, PaymentEngine, BioCellSimulator
 
 
 def test_meshes_are_valid():
@@ -117,6 +118,7 @@ def test_timeline_is_monotonic_and_continuous():
 
 
 def test_screens_render_and_taps():
+    assert len(PAGES) == 7
     tel, scr = Telemetry(), WatchScreen()
     events = []
     scr.on_event = events.append
@@ -126,25 +128,38 @@ def test_screens_render_and_taps():
         scr.set_page(i)
         scr.update(0.5)
         img = scr.render(tel)
-        assert img.size == (W, H) and img.mode == "RGBA"
+        assert img.size == (W * S, H * S) and img.mode == "RGBA"
         a = np.asarray(img)[..., 3]
-        assert a[H // 2, W // 2] > 200 and a[0, 0] < 20     # rounded corner is transparent
+        assert a[H * S // 2, W * S // 2] > 200 and a[0, 0] < 20     # rounded corner is transparent
     # nav tap switches page
     scr.set_page(0)
     scr.render(tel)
     nav = dict((n, r) for n, r in scr.hits)["nav3"]
     assert scr.tap((nav[0] + nav[2]) / 2, (nav[1] + nav[3]) / 2) and scr.page == 3
-    # SOS state machine
+    # Payments test on page 3
+    scr.set_page(3)
+    scr.render(tel)
+    assert scr.tap(76, 126)  # tap & pay starts PIN entry
+    assert scr.payments.auth_state == "PIN_ENTRY"
+    for d in "1234":
+        scr.tap(36 + 76, 142) if d == "2" else scr.tap(36, 142) if d == "1" else scr.tap(36 + 152, 142) if d == "3" else scr.tap(36, 142 + 42)
+    # Bio-cell test on page 4
     scr.set_page(4)
     scr.render(tel)
-    assert scr.tap(144, 138) and scr.sos_state == "counting"
-    for _ in range(40):
+    prev_mode = scr.bio.mode
+    assert scr.tap(100, 240)  # tap next cell type
+    assert scr.bio.mode != prev_mode
+    # SOS state machine (on page 6)
+    scr.set_page(6)
+    scr.render(tel)
+    assert scr.tap(144, 134) and scr.sos_state == "counting"
+    for _ in range(50):
         scr.update(0.1)
     assert scr.sos_state == "active"
     scr.render(tel)
-    assert scr.tap(144, 138) and scr.sos_state == "idle"
+    assert scr.tap(144, 134) and scr.sos_state == "idle"
     # power-on wipe: fully dark at power 0
-    assert np.asarray(scr.render(tel, power=0.0))[..., 3][H // 2, W // 2] == 0
+    assert np.asarray(scr.render(tel, power=0.0))[..., 3][H * S // 2, W * S // 2] == 0
 
 
 if __name__ == "__main__":      # works without pytest
