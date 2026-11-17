@@ -1,33 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "public": false,
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    },
     {
       "source": "/static/(.*)",
       "destination": "/frontend/$1"
     },
     {
-      "source": "/health",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/manifest",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/docs",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/openapi.json",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/",
+      "source": "/(.*)",
       "destination": "/frontend/index.html"
     }
   ]
