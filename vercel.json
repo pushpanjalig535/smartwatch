@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "dora-payments/frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/dora-payments/frontend/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(health|manifest|docs|openapi.json)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/",
+      "dest": "/dora-payments/frontend/index.html"
+    }
+  ]
+}
